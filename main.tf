@@ -53,7 +53,7 @@ module "eks" {
   workers_group_defaults = {
     instance_type                 = "r5.xlarge"
     name                          = "eks_workers_a"
-    #ami_id                        = "ami-03a2cce9abe958c6c"
+    ami_id                        = "ami-0d275f57a60281ccc"
     asg_max_size                  = 10
     asg_min_size                  = 2
     root_volume_size              = 100
