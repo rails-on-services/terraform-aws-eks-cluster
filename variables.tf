@@ -40,7 +40,7 @@ variable "default_security_group_id" {
 
 variable "eks_worker_ami_name_filter" {
   type    = string
-  default = "v*"
+  default = ""
 }
 
 variable "eks_cluster_enabled_log_types" {

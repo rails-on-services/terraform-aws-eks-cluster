@@ -26,12 +26,11 @@ resource "aws_security_group_rule" "eks-cluster-ingress-internet-https" {
 
 module "eks" {
   source       = "terraform-aws-modules/eks/aws"
-  version      = "~> 6.0.0"
+  version      = ">= 8.0.0"
   cluster_name = var.cluster_name
   subnets      = concat(var.public_subnets, var.private_subnets)
   vpc_id       = var.vpc_id
 
-  cluster_create_security_group   = false
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
   cluster_security_group_id       = aws_security_group.eks-cluster.id
@@ -39,7 +38,6 @@ module "eks" {
   cluster_enabled_log_types       = var.eks_cluster_enabled_log_types
   cluster_version                 = var.eks_cluster_version
 
-  manage_aws_auth    = true
   write_kubeconfig   = true
   config_output_path = "./"
   kubeconfig_name    = var.cluster_name
@@ -53,7 +51,7 @@ module "eks" {
   workers_group_defaults = {
     instance_type                 = "r5.xlarge"
     name                          = "eks_workers_a"
-    ami_id                        = "ami-0d275f57a60281ccc"
+    # ami_id                        = "ami-0d275f57a60281ccc"
     asg_max_size                  = 10
     asg_min_size                  = 2
     root_volume_size              = 100
